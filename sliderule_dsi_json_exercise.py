@@ -92,23 +92,24 @@ sample_json_df
 # 3. In 2. above you will notice that some entries have only the code and the name is missing. Create a dataframe with the missing names filled in.
 
 # In[8]:
-
+# 1. Find the 10 countries with most projects
 df = pd.read_json('data/world_bank_projects.json')
 df.countryname.value_counts().head(10)
 
 
 # In[9]:
-
+# 2. Find the top 10 major project themes (using column 'mjtheme_namecode')
 json_string = json.load((open('data/world_bank_projects.json')))
 df_theme = json_normalize(json_string, 'mjtheme_namecode')
 df_theme.name.value_counts().head(10)
 
 
 # In[10]:
+#3. Create a dataframe with the missing names filled in.
 
-df_theme_lookup= df_theme[df_theme.name != '']
-df_theme_lookup = df_theme_lookup.drop_duplicates()
-lookup_series = df_theme_lookup.set_index('code').name
+df_theme_lookup= df_theme[df_theme.name != '']  # Remove null entries
+df_theme_lookup = df_theme_lookup.drop_duplicates() # remove duplicate entries of themecode and name
+lookup_series = df_theme_lookup.set_index('code').name #create a series for lookup based on theme code
 lookup_series
 
 
