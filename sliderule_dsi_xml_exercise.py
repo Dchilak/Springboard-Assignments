@@ -207,7 +207,6 @@ lake_df[lake_df.area == lake_df.area.max()]
 airport_df[airport_df.elevation == airport_df.elevation.max()]
 
 
-# In[ ]:
 
 
 
